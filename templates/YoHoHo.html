@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Purchase Prediction | ML Model</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            width: 420px;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #243b55;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #243b55;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #243b55;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #141e30;
+        }
+
+        /* Prediction Result */
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            text-align: center;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .not-purchased {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Purchase Prediction</h1>
+
+        <p class="subtitle">
+            Machine Learning Customer Prediction System
+        </p>
+
+        <!-- Input Form -->
+
+        <form action="/predict" method="POST">
+
+            <label for="age">Customer Age</label>
+
+            <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Enter your age"
+                min="1"
+                max="120"
+                required
+            >
+
+            <label for="gender">Gender</label>
+
+            <select id="gender" name="gender" required>
+
+                <option value="" disabled selected>
+                    Select Gender
+                </option>
+
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+
+            </select>
+
+            <label for="salary">Estimated Salary</label>
+
+            <input
+                type="number"
+                id="salary"
+                name="salary"
+                placeholder="Enter estimated salary"
+                min="0"
+                required
+            >
+
+            <button type="submit">
+                Predict Purchase
+            </button>
+
+        </form>
+
+        <!-- Display Prediction Result -->
+
+        {% if shyam is defined and shyam is not none %}
+
+            <div class="result
+                {% if shyam == 0 %}
+                    not-purchased
+                {% endif %}
+            ">
+
+                {% if shyam == 1 %}
+
+                    Customer Will Purchase!
+
+                {% elif shyam == 0 %}
+
+                    Customer Will Not Purchase.
+
+                {% else %}
+
+                    Prediction: {{ shyam }}
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
